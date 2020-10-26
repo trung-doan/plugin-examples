@@ -1,0 +1,9 @@
+#jsedit-config {
+  background-color: #1F2227;
+  min-height: 600px;
+}
+
+.js-edit__content {
+  display: flex;
+  justify-content: space-between;
+}

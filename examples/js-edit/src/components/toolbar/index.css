@@ -1,0 +1,6 @@
+.js-edit__toolbar {
+  background-color: #0d0d0f;
+  padding: 2px;
+  display: flex;
+  justify-content: space-between;
+}
