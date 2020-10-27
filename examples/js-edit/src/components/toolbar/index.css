@@ -11,6 +11,7 @@
   border-radius: 4px;
   margin: 0px 2px;
   color: #dcdcdc;
+  cursor: pointer;
 }
 
 .js-edit__toolbar__group__btn:hover {
