@@ -8,6 +8,9 @@
 import Toolbar from '../components/toolbar/index';
 import CustomList from '../components/custom-list/index';
 import Editor from '../components/editor/index';
+import {confirmDiscard} from '../common/index';
+import UserGuid from '../components/user-guide/index';
+import {getUserGuildUrl} from '../config/index';
 
 import './index.css';
 
@@ -26,11 +29,16 @@ toolbarEl.addEventListener('discard', () => {
 });
 
 toolbarEl.addEventListener('back-to-plugins', () => {
-  console.log('back-to-plugins');
+  // TODO: (app.modeifiedFile && !confirmDiscard())
+  if (!confirmDiscard()) return;
+  window.history.back();
 });
 
 toolbarEl.addEventListener('help', () => {
-  console.log('help');
+  const userGuid = new UserGuid({
+    links: getUserGuildUrl()
+  });
+  rootEl.appendChild(userGuid.render());
 });
 
 toolbarEl.addEventListener('max-min-toggle', () => {

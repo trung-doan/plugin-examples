@@ -1,0 +1,29 @@
+.js-edit__content__user-guide{
+  width: 200px;
+  height: 88px;
+  display: inline-block;
+  position: absolute;
+  right: 36px;
+  top: 60px;
+  background: #363679;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.js-edit__content__user-guide__header{
+  position: relative;
+  height: 20px;
+}
+
+.js-edit__content__user-guide__header button.kuc-icon-btn{
+  position: absolute;
+  right: 0px;
+}
+
+.js-edit__content__user-guide__container a{
+  color: #bbbbbb;
+}
+
+.js-edit__content__user-guide__container a:hover{
+  color: #ffffff;
+}

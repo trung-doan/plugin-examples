@@ -4,12 +4,13 @@
  *
  * Licensed under the MIT License
  */
-
+import {i18n} from '../../config/index';
 import './index.css';
+
+const resource = i18n();
 
 export default class Toolbar {
   el: HTMLDivElement;
-
   private _dispatch(eventName: string) {
     const event = new CustomEvent(eventName);
 
@@ -42,7 +43,7 @@ export default class Toolbar {
     const btns = [
       ['Save', 'save', 'js-edit__toolbar__group__btn'],
       ['Discard', 'discard', 'js-edit__toolbar__group__btn'],
-      ['Back to Plug-ins', 'back-to-plugins', 'js-edit__toolbar__group__btn']
+      [resource.BACK_TO_PLUGINS, 'back-to-plugins', 'js-edit__toolbar__group__btn']
     ];
 
     this._createGroupBtns(btns, leftGroupEl);
@@ -62,7 +63,7 @@ export default class Toolbar {
     rightGroupEl.className = 'js-edit__toolbar__group';
 
     const btns = [
-      ['Help', 'help', 'js-edit__toolbar__group__btn'],
+      [resource.HELP, 'help', 'js-edit__toolbar__group__btn'],
       ['Maximize', 'max-min-toggle', 'js-edit__toolbar__group__btn']
     ];
 
