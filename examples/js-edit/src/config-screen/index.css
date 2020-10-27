@@ -3,7 +3,17 @@
   min-height: 600px;
 }
 
+#jsedit-config.maximize {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
 .js-edit__content {
   display: flex;
   justify-content: space-between;
+  height: 100%;
 }

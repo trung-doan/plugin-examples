@@ -64,7 +64,7 @@ export default class Toolbar {
 
     const btns = [
       [resource.HELP, 'help', 'js-edit__toolbar__group__btn'],
-      ['Maximize', 'max-min-toggle', 'js-edit__toolbar__group__btn']
+      [resource.MAXIMIZE, 'max-min-toggle', 'js-edit__toolbar__group__btn min-max-btn']
     ];
 
     this._createGroupBtns(btns, rightGroupEl);

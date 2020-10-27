@@ -1,5 +1,6 @@
 .js-edit__content__custom-list {
-  height: 600px;
+  min-height: 600px;
+  height: 100%;
   width: 240px;
   border-right: 1px solid #585858;
 }

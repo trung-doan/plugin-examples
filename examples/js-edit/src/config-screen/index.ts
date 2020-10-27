@@ -42,7 +42,16 @@ toolbarEl.addEventListener('help', () => {
 });
 
 toolbarEl.addEventListener('max-min-toggle', () => {
-  console.log('max-min-toggle');
+  const minMaxEl = rootEl.querySelector('.js-edit__toolbar .js-edit__toolbar__group__btn.min-max-btn');
+  const isMaximize = rootEl.classList.contains('maximize');
+  if (isMaximize) {
+    rootEl.classList.remove('maximize');
+    minMaxEl.textContent = 'Maximize';
+  } else {
+    rootEl.classList.toggle('maximize');
+    minMaxEl.textContent = 'Minimize';
+  }
+  console.log(minMaxEl.textContent);
 });
 
 const contentEl = document.createElement('div');
