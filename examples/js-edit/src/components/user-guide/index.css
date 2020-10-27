@@ -8,6 +8,7 @@
   background: #363679;
   padding: 10px;
   border-radius: 4px;
+  z-index: 1;
 }
 
 .js-edit__content__user-guide__header{
