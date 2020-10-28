@@ -6,19 +6,29 @@
  */
 
 import Toolbar from '../components/toolbar/index';
+import SecondToolbar from '../components/second-toolbar/index';
 import CustomList from '../components/custom-list/index';
 import Editor from '../components/editor/index';
 import {confirmDiscard} from '../common/index';
 import UserGuid from '../components/user-guide/index';
-import {getUserGuildUrl} from '../config/index';
+import {i18n, getUserGuildUrl} from '../config/index';
 
 import './index.css';
 
+const resource = i18n();
 const rootEl = document.getElementById('jsedit-config');
 
 const toobar = new Toolbar();
 const toolbarEl = toobar.render();
 rootEl.appendChild(toolbarEl);
+
+const secondToolbar = new SecondToolbar();
+const secondToolbarEl = secondToolbar.render();
+rootEl.appendChild(secondToolbarEl);
+
+secondToolbarEl.addEventListener('onChange', (event) => {
+  console.log('change', event);
+});
 
 toolbarEl.addEventListener('save', () => {
   console.log('save');
@@ -46,12 +56,11 @@ toolbarEl.addEventListener('max-min-toggle', () => {
   const isMaximize = rootEl.classList.contains('maximize');
   if (isMaximize) {
     rootEl.classList.remove('maximize');
-    minMaxEl.textContent = 'Maximize';
+    minMaxEl.textContent = resource.MAXIMIZE;
   } else {
     rootEl.classList.toggle('maximize');
-    minMaxEl.textContent = 'Minimize';
+    minMaxEl.textContent = resource.MINIMIZE;
   }
-  console.log(minMaxEl.textContent);
 });
 
 const contentEl = document.createElement('div');

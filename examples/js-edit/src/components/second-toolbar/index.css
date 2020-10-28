@@ -1,0 +1,9 @@
+.js-edit__second-toolbar {
+  margin: 5px;
+}
+
+.js-edit__second-toolbar .js-edit__second-toolbar__update-app label{
+  color: #ffffff;
+  margin-left: 5px;
+  font-size: 12px;
+}
