@@ -23,20 +23,21 @@ export default class SecondToolbar {
   }
 
   private createCheckBoxItem() {
+    const defaultValue = 'checked';
     const checkbox = new kintoneUIComponent.CheckBox({
       items: [
         {
           label: resource.UPDATE_APP_WHEN_SAVING_THE_CODE,
-          value: 'checked',
-          isDisabled: false
+          value: defaultValue,
         }
       ],
-      value: ['checked']
+      value: [defaultValue]
     });
     const groupEl = document.createElement('div');
     groupEl.className = 'js-edit__second-toolbar__update-app';
-    checkbox.on('change', (value: any) => {
-      this._dispatch('onChange', {detail: value});
+    checkbox.on('change', (values: string[]) => {
+      const isChecked = values.some((item: string) => item === defaultValue);
+      this._dispatch('onChange', {detail: {isChecked}});
     });
     groupEl.appendChild(checkbox.render());
     return groupEl;
