@@ -39,6 +39,10 @@ export default class Editor {
     this._initAce();
   }
 
+  getValue() {
+    return this.ace.getValue();
+  }
+
   render() {
     return this.el;
   }

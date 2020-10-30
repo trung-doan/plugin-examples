@@ -15,3 +15,5 @@ type ItemUserGuide = {
 type UserGuideProps = {
   links: ItemUserGuide[];
 };
+
+declare type CustomizationType = 'js_pc' | 'js_mb' | 'css_pc'| 'css_mb' | '';

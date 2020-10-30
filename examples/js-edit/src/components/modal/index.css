@@ -1,0 +1,59 @@
+.js-edit__modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 9999;
+}
+
+.js-edit__modal.open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.js-edit__modal__modal-container {
+  margin: 25% auto;
+  padding: 10px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.js-edit__modal__modal-container__title {
+  margin: 5px 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+  font-size: 15pt;
+}
+
+.js-edit__modal__modal-container__close {
+  position: absolute;
+  right: 30px;
+  transition: all 200ms;
+  text-decoration: none;
+  color: #333;
+  width: 50px;
+  height: 20px;
+  text-align: center;
+}
+
+.js-edit__modal__modal-container__close:hover {
+  color: #000;
+}
+
+.js-edit__modal__modal-container__content {
+  max-height: 30%;
+  margin: 10px;
+  overflow: auto;
+}
+
+.js-edit__modal__modal-container__footer {
+  margin: 10px;
+}

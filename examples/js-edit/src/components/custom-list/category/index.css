@@ -1,0 +1,44 @@
+.js-edit__content__custom-list__custom-item__hierarchy .category-container {
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0;
+}
+
+.js-edit__content__custom-list__custom-item__hierarchy .category-container > * {
+  color: #fff;
+}
+
+.js-edit__content__custom-list__custom-item__hierarchy .category-container .category {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.js-edit__content__custom-list__custom-item__hierarchy .category-container .category span {
+  margin-left: 10px;
+}
+
+.js-edit__content__custom-list__custom-item__hierarchy .category-container .category div.action button {
+  min-width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.js-edit__content__custom-list__custom-item__hierarchy .category-container .file,
+.js-edit__content__custom-list__custom-item__hierarchy .category-container .link {
+  color: #fff;
+  padding-left: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: text-bottom;
+}
+
+.js-edit__content__custom-list__custom-item__hierarchy .category-container .link a {
+  vertical-align: text-bottom;
+}
+
+.js-edit__content__custom-list__custom-item__hierarchy .category-container .file:hover,
+.js-edit__content__custom-list__custom-item__hierarchy .category-container .link:hover {
+  background-color: rgb(163, 163, 163);
+}
