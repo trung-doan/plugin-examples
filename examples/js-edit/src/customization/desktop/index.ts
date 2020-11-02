@@ -1,7 +1,7 @@
 
-import { Category } from '../../components/custom-list/category/index';
-import { Hierarchy } from '../../components/custom-list/hierarchy/index';
-import { Modal } from '../../components/modal/index';
+import {Category} from '../../components/custom-list/category/index';
+import {Hierarchy} from '../../components/custom-list/hierarchy/index';
+import {Modal} from '../../components/modal/index';
 import {createModalContent, createButtonEl} from '../modal/index';
 import {renderCustomization, uploadFileToCustomization, uploadLinkToCustomization, renderEditorValueByFileKey,
   getDefaultSourceForNewFile, getFileName} from '../common';
