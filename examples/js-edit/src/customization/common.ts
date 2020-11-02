@@ -23,10 +23,25 @@ export function getDefaultSourceForNewFile(type: CustomizationType) {
   return DEFAULT_SOURCE[type];
 }
 
-export function renderEditorValueByFileKey(editor: any, fileKey: string) {
+function _getEditorMode(customKey: CustomizationType) {
+  console.log(customKey);
+  switch (customKey) {
+    case JS_PC:
+    case JS_MB:
+      return 'ace/mode/javascript';
+    case CSS_PC:
+    case CSS_MB:
+      return 'ace/mode/css';
+
+    default:
+      return 'ace/mode/javascript';
+  }
+}
+
+export function renderEditorValueByFileKey(customKey: CustomizationType, editor: any, fileKey: string) {
   getFile(fileKey).then((file: any) => {
-    console.log(file);
     editor.ace.setValue(file);
+    editor.ace.getSession().setMode(_getEditorMode(customKey));
   }).catch((err: any) => {
     console.log(err);
   });

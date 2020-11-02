@@ -92,8 +92,8 @@ export class Mobile {
     this._modal.open();
   }
 
-  private _handleFileSelectEvent(editor: any, event: any) {
-    renderEditorValueByFileKey(editor, event.detail.fileKey);
+  private _handleFileSelectEvent(customKey: CustomizationType, editor: any, event: any) {
+    renderEditorValueByFileKey(customKey, editor, event.detail.fileKey);
   }
 
   private _handleLinkSelectEvent(event: any) {
@@ -105,7 +105,7 @@ export class Mobile {
     this._jsCategoryEl.addEventListener('create-file', () => this._handleCreateFileEvent(JS_MB));
 
     this._jsCategoryEl.addEventListener('link-select', (event) => this._handleLinkSelectEvent(event));
-    this._jsCategoryEl.addEventListener('file-select', (event: any) => this._handleFileSelectEvent(this._editor, event));
+    this._jsCategoryEl.addEventListener('file-select', (event: any) => this._handleFileSelectEvent(JS_MB, this._editor, event));
   }
 
   private _initCSSEvent() {
@@ -113,7 +113,7 @@ export class Mobile {
     this._cssCategoryEl.addEventListener('create-file', () => this._handleCreateFileEvent(CSS_MB));
 
     this._cssCategoryEl.addEventListener('link-select', (event) => this._handleLinkSelectEvent(event));
-    this._cssCategoryEl.addEventListener('file-select', (event: any) => this._handleFileSelectEvent(this._editor, event));
+    this._cssCategoryEl.addEventListener('file-select', (event: any) => this._handleFileSelectEvent(CSS_MB, this._editor, event));
   }
 
   private _initData() {
