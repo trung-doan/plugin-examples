@@ -1,0 +1,17 @@
+.js-edit__modal__modal-container__content__row {
+  display: flex;
+  height: 36px;
+  width: 100%;
+}
+
+.js-edit__modal__modal-container__content__row .kuc-input-text,
+.js-edit__modal__modal-container__content__row .kuc-btn.normal {
+  height: 32px;
+  line-height: 32px;
+  min-width: unset;
+  flex: revert;
+}
+
+.js-edit__modal__modal-container__content__row .kuc-input-text {
+  width: 100%;
+}

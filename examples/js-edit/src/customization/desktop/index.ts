@@ -2,7 +2,7 @@
 import {Category} from '../../components/custom-list/category/index';
 import {Hierarchy} from '../../components/custom-list/hierarchy/index';
 import {Modal} from '../../components/modal/index';
-import {createModalContent, createButtonEl} from '../modal/index';
+import {createModalContentRow} from '../modal/index';
 import {renderCustomization, uploadFileToCustomization, uploadLinkToCustomization, renderEditorValueByFileKey,
   getDefaultSourceForNewFile, getFileName} from '../common';
 import {JS_PC, CSS_PC, JS_MB, CSS_MB} from '../../constant';
@@ -43,118 +43,77 @@ export class Desktop {
     this._initCSSEvent();
   }
 
+  private _handleAddLinkEvent(category: Category, customKey: CustomizationType) {
+    const textbox = new kintoneUIComponent.Text();
+    const button = new kintoneUIComponent.Button({text: 'Save', type: 'normal'});
+    button.on('click', () => {
+      const link = textbox.getValue();
+      category.addLink(textbox.getValue());
+      uploadLinkToCustomization(customKey, link);
+
+      this._modal.close();
+    });
+
+    this._modal.setTitle('Add Link');
+
+    const contentEl = createModalContentRow(textbox, button);
+    this._modal.setContent(contentEl);
+
+    this._modal.open();
+  }
+
+  private _handleCreateFileEvent(customKey: CustomizationType) {
+    const textbox = new kintoneUIComponent.Text();
+    const button = new kintoneUIComponent.Button({text: 'Create', type: 'normal'});
+    button.on('click', () => {
+      const name = textbox.getValue();
+      const fileName = getFileName(name, customKey === JS_PC ? 'js' : 'css');
+
+      if (fileName === null) return;
+
+      const value = getDefaultSourceForNewFile(customKey);
+
+      uploadFileToCustomization(customKey, fileName, value)
+        .then(() => {
+          this.rerender();
+        })
+        .catch((error: any) => {
+          console.log(error);
+        });
+
+      this._modal.close();
+    });
+
+    this._modal.setTitle('Create file');
+
+    const contentEl = createModalContentRow(textbox, button);
+    this._modal.setContent(contentEl);
+
+    this._modal.open();
+  }
+
+  private _handleFileSelectEvent(editor: any, event: any) {
+    renderEditorValueByFileKey(editor, event.detail.fileKey);
+  }
+
+  private _handleLinkSelectEvent(event: any) {
+    console.log('link-select', event);
+  }
+
   private _initJSEvent() {
-    this._jsCategoryEl.addEventListener('add-link', () => {
-      const modalContent = createModalContent();
-      const button = createButtonEl('Save');
-      button.addEventListener('click', () => {
-        const valueEl = modalContent.querySelector('#input-value') as HTMLInputElement;
-        this._jsCategory.addLink(valueEl.value);
+    this._jsCategoryEl.addEventListener('add-link', () => this._handleAddLinkEvent(this._jsCategory, JS_PC));
+    this._jsCategoryEl.addEventListener('create-file', () => this._handleCreateFileEvent(JS_PC));
 
-        uploadLinkToCustomization(JS_PC, valueEl.value);
-
-        this._modal.close();
-      });
-
-      this._modal.setTitle('Input link:');
-      this._modal.setContent(modalContent);
-      this._modal.setFooter(button);
-      this._modal.open();
-    });
-
-    this._jsCategoryEl.addEventListener('create-file', () => {
-      const modalContent = createModalContent();
-      const button = createButtonEl('Create');
-      button.addEventListener('click', () => {
-        const valueEl = modalContent.querySelector('#input-value') as HTMLInputElement;
-
-        const fileName = getFileName(valueEl.value, 'js');
-
-        if (fileName === null) return;
-
-        const value = getDefaultSourceForNewFile(JS_PC);
-
-        uploadFileToCustomization(JS_PC, fileName, value)
-          .then(() => {
-            this.rerender();
-          })
-          .catch((error: any) => {
-            console.log(error);
-          });
-
-        this._modal.close();
-      });
-
-      this._modal.setTitle('Input file name:');
-      this._modal.setContent(modalContent);
-      this._modal.setFooter(button);
-      this._modal.open();
-    });
-
-    this._jsCategoryEl.addEventListener('link-select', (event) => {
-      console.log('link-select', event);
-    });
-
-    this._jsCategoryEl.addEventListener('file-select', (event: any) => {
-      renderEditorValueByFileKey(this._editor, event.detail.fileKey);
-    });
+    this._jsCategoryEl.addEventListener('link-select', (event) => this._handleLinkSelectEvent(event));
+    this._jsCategoryEl.addEventListener('file-select', (event: any) => this._handleFileSelectEvent(this._editor, event));
   }
 
   private _initCSSEvent() {
-    this._cssCategoryEl.addEventListener('add-link', () => {
-      const modalContent = createModalContent();
-      const button = createButtonEl('Save');
-      button.addEventListener('click', () => {
-        const valueEl = modalContent.querySelector('#input-value') as HTMLInputElement;
-        this._cssCategory.addLink(valueEl.value);
+    this._cssCategoryEl.addEventListener('add-link', () => this._handleAddLinkEvent(this._cssCategory, CSS_PC));
+    this._cssCategoryEl.addEventListener('create-file', () => this._handleCreateFileEvent(CSS_PC));
 
-        uploadLinkToCustomization(CSS_PC, valueEl.value);
-
-        this._modal.close();
-      });
-
-      this._modal.setTitle('Add link');
-      this._modal.setContent(modalContent);
-      this._modal.setFooter(button);
-      this._modal.open();
-    });
-
-    this._cssCategoryEl.addEventListener('create-file', () => {
-      const modalContent = createModalContent();
-      const button = createButtonEl('Create');
-      button.addEventListener('click', () => {
-        const valueEl = modalContent.querySelector('#input-value') as HTMLInputElement;
-
-        const fileName = getFileName(valueEl.value, 'css');
-
-        if (fileName === null) return;
-
-        const value = getDefaultSourceForNewFile(CSS_PC);
-
-        uploadFileToCustomization(CSS_PC, fileName, value)
-          .then(() => {
-            this.rerender();
-          })
-          .catch((error: any) => {
-            console.log(error);
-          });
-
-        this._modal.close();
-      });
-
-      this._modal.setTitle('Create file');
-      this._modal.setContent(modalContent);
-      this._modal.setFooter(button);
-      this._modal.open();
-    });
-
-    this._cssCategoryEl.addEventListener('link-select', (event) => {
-      console.log('link-select', event);
-    });
-
-    this._cssCategoryEl.addEventListener('file-select', (event: any) => {
-      renderEditorValueByFileKey(this._editor, event.detail.fileKey);
-    });
+    this._cssCategoryEl.addEventListener('link-select', (event) => this._handleLinkSelectEvent(event));
+    this._cssCategoryEl.addEventListener('file-select', (event: any) => this._handleFileSelectEvent(this._editor, event));
   }
 
   private _initData() {
