@@ -33,21 +33,6 @@
   font-size: 15pt;
 }
 
-.js-edit__modal__modal-container__close {
-  position: absolute;
-  right: 30px;
-  transition: all 200ms;
-  text-decoration: none;
-  color: #333;
-  width: 50px;
-  height: 20px;
-  text-align: center;
-}
-
-.js-edit__modal__modal-container__close:hover {
-  color: #000;
-}
-
 .js-edit__modal__modal-container__content {
   max-height: 30%;
   margin: 10px;
@@ -56,4 +41,10 @@
 
 .js-edit__modal__modal-container__footer {
   margin: 10px;
+}
+
+.js-edit__modal__modal-container .kuc-icon-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
 }

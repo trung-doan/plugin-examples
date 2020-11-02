@@ -23,10 +23,8 @@ export class Modal {
     this._modalTitle = document.createElement('span');
     this._modalTitle.classList.add('js-edit__modal__modal-container__title');
 
-    const modalClose = document.createElement('button');
-    modalClose.classList.add('js-edit__modal__modal-container__close');
-    modalClose.onclick = this.close.bind(this);
-    modalClose.textContent = 'close';
+    const modalClose = new kintoneUIComponent.IconButton({type: 'close', color: 'transparent'});
+    modalClose.on('click', () => this.close());
 
     this._modalContent = document.createElement('div');
     this._modalContent.classList.add('js-edit__modal__modal-container__content');
@@ -35,7 +33,7 @@ export class Modal {
     this._modalFooter.classList.add('js-edit__modal__modal-container__footer');
 
     modalContainer.appendChild(this._modalTitle);
-    modalContainer.appendChild(modalClose);
+    modalContainer.appendChild(modalClose.render());
     modalContainer.appendChild(this._modalContent);
     modalContainer.appendChild(this._modalFooter);
 
