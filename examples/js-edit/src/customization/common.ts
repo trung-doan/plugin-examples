@@ -6,7 +6,7 @@ export function getFileName(fileName: string, ext: 'js' | 'css') {
   const result = ext === 'js' ? fileName.match(/[^\\]*\.js$/g) : fileName.match(/[^\\]*\.css$/g);
   if (result === null) {
     return `${fileName}.${ext}`;
-  };
+  }
   return fileName;
 }
 
@@ -187,11 +187,10 @@ function _createUpdatingFiles(customizationInfos: any, newFileKey: string, curre
     customizationInfos.forEach((item: any, index: any) => {
       if (item.type === 'FILE' && item.file.fileKey === currentFileKey) {
         customizationInfos[index].file = {fileKey: newFileKey};
-        return;
       }
     });
   }
-console.log(customizationInfos);
+
   return customizationInfos;
 }
 
