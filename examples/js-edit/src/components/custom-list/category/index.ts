@@ -1,5 +1,6 @@
-import { createSpanEl } from '../../commons/index';
+import {createSpanEl} from '../../commons/index';
 import {dispatchCustomEvent} from '../../../customization/common';
+import {mdiFilePlusOutline, mdiLinkVariantPlus} from '@mdi/js';
 
 import './index.css';
 
@@ -69,7 +70,7 @@ export class Category {
     return {
       category: (value?: string) => {
         const divContainer = document.createElement('div');
-        divContainer.classList.add('category-container');
+        divContainer.classList.add('category__container');
         divContainer.id = value;
 
         const divTitle = this._createCategoryTitleEl(value);
@@ -108,9 +109,9 @@ export class Category {
 
   private _createCategoryTitleEl(title: string) {
     const divTitle = document.createElement('div');
-    divTitle.classList.add('category');
+    divTitle.classList.add('category__container__block');
 
-    const span = createSpanEl(title);
+    const span = createSpanEl(title, 'category__container__title');
     divTitle.appendChild(span);
 
     const divAction = this._createCategoryActionsEl();
@@ -119,25 +120,28 @@ export class Category {
     return divTitle;
   }
 
+  private _customKucIconBtn(iconData: string) {
+    const iconBtn = new kintoneUIComponent.IconButton({color: 'transparent'});
+    iconBtn.pathEl.setAttribute('d', iconData);
+
+    return iconBtn;
+  }
+
   private _createCategoryActionsEl() {
-    const buttonAddLink = document.createElement('button');
-    buttonAddLink.classList.add('add-link');
-    buttonAddLink.textContent = 'Link';
-    buttonAddLink.addEventListener('click', () => {
+    const buttonAddLink = this._customKucIconBtn(mdiLinkVariantPlus);
+    buttonAddLink.on('click', () => {
       dispatchCustomEvent(this.el, 'add-link');
     });
 
-    const buttonAddFile = document.createElement('button');
-    buttonAddFile.classList.add('create-file');
-    buttonAddFile.textContent = 'File';
-    buttonAddFile.addEventListener('click', () => {
+    const buttonAddFile = this._customKucIconBtn(mdiFilePlusOutline);
+    buttonAddFile.on('click', () => {
       dispatchCustomEvent(this.el, 'create-file');
     });
 
     const divActions = document.createElement('div');
     divActions.classList.add('action');
-    divActions.appendChild(buttonAddLink);
-    divActions.appendChild(buttonAddFile);
+    divActions.appendChild(buttonAddLink.render());
+    divActions.appendChild(buttonAddFile.render());
 
     return divActions;
   }

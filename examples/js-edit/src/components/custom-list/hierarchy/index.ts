@@ -17,7 +17,7 @@ export class Hierarchy {
     this.el.className = 'js-edit__content__custom-list__custom-item__hierarchy';
 
     const spanTitle = createSpanEl(this._name);
-    spanTitle.classList.add('title');
+    spanTitle.classList.add('js-edit__content__custom-list__custom-item__hierarchy__title');
     this.el.appendChild(spanTitle);
   }
 

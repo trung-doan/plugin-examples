@@ -1,31 +1,38 @@
-.js-edit__content__custom-list__custom-item__hierarchy .category-container {
+.js-edit__content__custom-list__custom-item__hierarchy .category__container {
   display: flex;
   flex-direction: column;
   margin: 5px 0;
 }
 
-.js-edit__content__custom-list__custom-item__hierarchy .category-container > * {
+.js-edit__content__custom-list__custom-item__hierarchy .category__container > * {
   color: #fff;
 }
 
-.js-edit__content__custom-list__custom-item__hierarchy .category-container .category {
+.js-edit__content__custom-list__custom-item__hierarchy .category__container__block {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.js-edit__content__custom-list__custom-item__hierarchy .category-container .category span {
+.js-edit__content__custom-list__custom-item__hierarchy .category__container__block span {
   margin-left: 10px;
 }
 
-.js-edit__content__custom-list__custom-item__hierarchy .category-container .category div.action button {
-  min-width: 20px;
-  height: 20px;
-  margin-right: 10px;
+.js-edit__content__custom-list__custom-item__hierarchy .category__container__block div.action button {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  padding: 4px 4px;
+  margin: 0px 4px;
 }
 
-.js-edit__content__custom-list__custom-item__hierarchy .category-container .file,
-.js-edit__content__custom-list__custom-item__hierarchy .category-container .link {
+.js-edit__content__custom-list__custom-item__hierarchy .category__container__block div.action button svg {
+  transform: scale(.75);
+  transform-origin: -18px -18px;
+}
+
+.js-edit__content__custom-list__custom-item__hierarchy .category__container .file,
+.js-edit__content__custom-list__custom-item__hierarchy .category__container .link {
   color: #fff;
   padding-left: 20px;
   white-space: nowrap;
@@ -34,11 +41,15 @@
   vertical-align: text-bottom;
 }
 
-.js-edit__content__custom-list__custom-item__hierarchy .category-container .link a {
+.js-edit__content__custom-list__custom-item__hierarchy .category__container .link a {
   vertical-align: text-bottom;
 }
 
-.js-edit__content__custom-list__custom-item__hierarchy .category-container .file:hover,
-.js-edit__content__custom-list__custom-item__hierarchy .category-container .link:hover {
+.js-edit__content__custom-list__custom-item__hierarchy .category__container .file:hover,
+.js-edit__content__custom-list__custom-item__hierarchy .category__container .link:hover {
   background-color: rgb(163, 163, 163);
+}
+
+.js-edit__content__custom-list__custom-item__hierarchy .category__container__title {
+  color: #c3c3c3;
 }
