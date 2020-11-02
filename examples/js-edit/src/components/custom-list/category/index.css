@@ -31,22 +31,28 @@
   transform-origin: -18px -18px;
 }
 
-.js-edit__content__custom-list__custom-item__hierarchy .category__container .file,
-.js-edit__content__custom-list__custom-item__hierarchy .category__container .link {
+.js-edit__content__custom-list__custom-item__hierarchy .category__container__block__file,
+.js-edit__content__custom-list__custom-item__hierarchy .category__container__block__link {
   color: #fff;
   padding-left: 20px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   vertical-align: text-bottom;
+  cursor: pointer;
 }
 
-.js-edit__content__custom-list__custom-item__hierarchy .category__container .link a {
+.js-edit__content__custom-list__custom-item__hierarchy .category__container__block__link a {
   vertical-align: text-bottom;
 }
 
-.js-edit__content__custom-list__custom-item__hierarchy .category__container .file:hover,
-.js-edit__content__custom-list__custom-item__hierarchy .category__container .link:hover {
+.js-edit__content__custom-list__custom-item__hierarchy .category__container__block__link a:hover {
+  color: #ffffff;
+}
+
+.js-edit__content__custom-list__custom-item__hierarchy .category__container__block__file--selected,
+.js-edit__content__custom-list__custom-item__hierarchy .category__container__block__file:hover,
+.js-edit__content__custom-list__custom-item__hierarchy .category__container__block__link:hover {
   background-color: rgb(163, 163, 163);
 }
 
