@@ -1,6 +1,6 @@
 .js-edit__second-toolbar {
   margin: 5px 0px 5px 0px;
-  border-bottom: 1px dotted #c3b4b4;
+  border-bottom: 1px solid #383838;
 }
 
 .js-edit__second-toolbar .js-edit__second-toolbar__update-app label{

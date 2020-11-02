@@ -98,14 +98,12 @@ toolbarEl.addEventListener('max-min-toggle', () => {
 });
 
 desktopEl.addEventListener('file-select', (event: any) => {
-  console.log('event', event);
   selectFileKey = event.detail.fileKey;
   selectFileName = event.detail.fileName;
   customizationType = event.detail.customizationType;
 });
 
 mobileEl.addEventListener('file-select', (event: any) => {
-  console.log('event', event);
   selectFileKey = event.detail.fileKey;
   selectFileName = event.detail.fileName;
   customizationType = event.detail.customizationType;

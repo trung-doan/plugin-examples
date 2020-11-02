@@ -53,7 +53,6 @@ export class Category {
   createFile(fileName: string = 'newFile', fileKey: string = '') {
     const newFile = this._generateTemplate('file', fileName, fileKey);
     this.el.appendChild(newFile);
-    console.log('this.el', this.el);
     return this;
   }
 
@@ -64,6 +63,15 @@ export class Category {
   ) {
     const template = this._getTemplate();
     return fileKey !== '' ? template[type](value, fileKey) : template[type](value);
+  }
+
+  private _highlightSelectedFileLink(fileLink: HTMLDivElement) {
+    const files = document.getElementsByClassName('category__container__block__file--selected');
+    for (let i = 0; i < files.length; i++) {
+      files[i].classList.remove('category__container__block__file--selected');
+    }
+
+    fileLink.classList.add('category__container__block__file--selected');
   }
 
   private _getTemplate() {
@@ -79,9 +87,10 @@ export class Category {
       },
       file: (value?: string, fileKey?: string) => {
         const div = document.createElement('div');
-        div.classList.add('file');
+        div.classList.add('category__container__block__file');
         div.textContent = value;
         div.addEventListener('click', (event) => {
+          this._highlightSelectedFileLink(event.target as HTMLDivElement);
           dispatchCustomEvent(this.el, 'file-select', {fileKey, fileName: value, customizationType: this._customizationType});
         });
 
@@ -91,9 +100,10 @@ export class Category {
         const a = document.createElement('a');
         a.href = link;
         a.textContent = link;
+        a.setAttribute('target', '_blank');
 
         const div = document.createElement('div');
-        div.classList.add('link');
+        div.classList.add('category__container__block__link');
         div.addEventListener('click', () => {
           dispatchCustomEvent(this.el, 'link-select');
         });

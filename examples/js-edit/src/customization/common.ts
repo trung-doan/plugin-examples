@@ -24,7 +24,6 @@ export function getDefaultSourceForNewFile(type: CustomizationType) {
 }
 
 function _getEditorMode(customKey: CustomizationType) {
-  console.log(customKey);
   switch (customKey) {
     case JS_PC:
     case JS_MB:
@@ -91,7 +90,6 @@ export function uploadFileToCustomization(type: CustomizationType, fileName: str
       newFileKey = file.fileKey;
       return getCustomization();
     }).then((customization: any) => {
-      console.log(customization);
       const content = _createUpdatingFileContent(type, customization, newFileKey, currentFileKey);
       const newCustomization = _createUpdatingCustomization(type, customization, content);
 
