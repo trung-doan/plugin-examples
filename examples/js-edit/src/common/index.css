@@ -1,0 +1,8 @@
+.js-edit__modal__modal-container__footer_buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.js-edit__modal__modal-container__footer .kuc-btn.normal{
+  float: left;
+}

@@ -9,7 +9,7 @@ import Toolbar from '../components/toolbar/index';
 import SecondToolbar from '../components/second-toolbar/index';
 import CustomList from '../components/custom-list/index';
 import Editor from '../components/editor/index';
-import {confirmDiscard} from '../common/index';
+import {confirmDiscard, confirmBackToPlugin} from '../common/index';
 import UserGuid from '../components/user-guide/index';
 import {i18n, getUserGuildUrl} from '../config/index';
 import {Modal} from '../components/modal/index';
@@ -67,13 +67,15 @@ toolbarEl.addEventListener('save', () => {
 });
 
 toolbarEl.addEventListener('discard', () => {
-  console.log('discard');
+  confirmDiscard(()=> {
+    desktop.rerender();
+    mobile.rerender();
+  });
 });
 
 toolbarEl.addEventListener('back-to-plugins', () => {
   // TODO: (app.modeifiedFile && !confirmDiscard())
-  if (!confirmDiscard()) return;
-  window.history.back();
+  confirmBackToPlugin(() => window.history.back());
 });
 
 toolbarEl.addEventListener('help', () => {
