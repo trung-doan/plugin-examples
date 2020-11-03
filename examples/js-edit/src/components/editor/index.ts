@@ -10,6 +10,7 @@ import './index.css';
 export default class Editor {
   el: HTMLDivElement;
   ace: any;
+  onChange: (e: any) => void;
 
   private _initLayout() {
     this.el = document.createElement('div');
@@ -30,7 +31,10 @@ export default class Editor {
       enableSnippets: false,
       enableLiveAutocompletion: true,
       tabSize: 2,
-      useSoftTabs: true
+      useSoftTabs: true,
+    });
+    this.ace.on('change', () => {
+      this.onChange && this.onChange(this.getValue());
     });
   }
 
@@ -41,6 +45,12 @@ export default class Editor {
 
   getValue() {
     return this.ace.getValue();
+  }
+
+  on(event: string, handler: (e: any) => void) {
+    if (event === 'change') {
+      this.onChange = handler;
+    }
   }
 
   render() {

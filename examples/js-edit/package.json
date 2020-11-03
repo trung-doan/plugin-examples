@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack --mode development --config webpack.config.js --watch",
+    "update-eslint": "./bin/update-eslint.sh",
     "build": "webpack",
     "pack": "kintone-plugin-packer ./ --out ./plugin/jsedit.zip --ppk ./plugin/lifgliakjnemggmaojnjnofpjginjoab.ppk",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,14 +13,16 @@
   "author": "Cybozu",
   "license": "ISC",
   "devDependencies": {
-    "@cybozu/eslint-config": "^11.0.1",
     "@mdi/js": "^5.8.55",
     "css-loader": "^5.0.0",
-    "eslint": "^7.12.0",
+    "eslint": "^7.12.1",
     "style-loader": "^2.0.0",
     "ts-loader": "^8.0.7",
     "typescript": "^4.0.3",
     "webpack": "^5.2.0",
     "webpack-cli": "^4.1.0"
+  },
+  "dependencies": {
+    "@cybozu/eslint-config": "^11.0.1"
   }
 }
