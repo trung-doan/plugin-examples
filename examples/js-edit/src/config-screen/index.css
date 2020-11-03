@@ -16,4 +16,9 @@
   display: flex;
   justify-content: space-between;
   height: 100%;
+  overflow: auto;
+}
+
+.jsedit__editor-wrapper {
+  width: 100%;
 }
