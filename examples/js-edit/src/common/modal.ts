@@ -9,7 +9,7 @@ function confirmModal(content?: string, onConfirm?: () => void, onCancel?: () =>
   const modal = new Modal();
   if (content) {
     const contentEl = document.createElement('div');
-    contentEl.classList.add('js-edit__modal__modal-container__content');
+    contentEl.classList.add('js-edit__modal__modal-container__content-text');
     contentEl.innerText = content;
     modal.setContent(contentEl);
   }

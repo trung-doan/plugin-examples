@@ -17,7 +17,7 @@
 }
 
 .js-edit__modal__modal-container {
-  margin: 25% auto;
+  margin: 20% auto;
   padding: 10px;
   background: #fff;
   border-radius: 5px;
@@ -27,10 +27,10 @@
 }
 
 .js-edit__modal__modal-container__title {
-  margin: 5px 0;
   color: #333;
   font-family: Tahoma, Arial, sans-serif;
   font-size: 15pt;
+  min-height: 24px;
 }
 
 .js-edit__modal__modal-container__content {

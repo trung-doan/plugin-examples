@@ -20,7 +20,7 @@ export class Modal {
     const modalContainer = document.createElement('div');
     modalContainer.classList.add('js-edit__modal__modal-container');
 
-    this._modalTitle = document.createElement('span');
+    this._modalTitle = document.createElement('div');
     this._modalTitle.classList.add('js-edit__modal__modal-container__title');
 
     const modalClose = new kintoneUIComponent.IconButton({type: 'close', color: 'transparent'});
