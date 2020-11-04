@@ -125,10 +125,10 @@ toolbarEl.addEventListener('max-min-toggle', () => {
   if (isMaximize) {
     rootEl.classList.remove('maximize');
     minMaxEl.textContent = resource.MAXIMIZE;
+    rootEl.style.height = `calc(100vh - ${rootPosition.top}px - 48px)`;
   } else {
     rootEl.classList.toggle('maximize');
     minMaxEl.textContent = resource.MINIMIZE;
-    const position = rootEl.getBoundingClientRect();
     rootEl.style.height = `100vh`;
   }
 });
