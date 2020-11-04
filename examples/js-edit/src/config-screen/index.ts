@@ -21,6 +21,7 @@ import * as Eslint from '../../vendor/eslint';
 import FeatureBox from '../components/feture-box/index';
 import es5Rule from '../../vendor/eslint-es5';
 import es6Rule from '../../vendor/eslint-es6';
+import {deployApp} from '../services/index';
 const resource = i18n();
 let selectFileKey: string = '';
 let selectFileName: string = '';
@@ -45,7 +46,7 @@ const secondToolbarEl = secondToolbar.render();
 const customListEl = customList.render();
 const desktopEl = desktop.render();
 const mobileEl = mobile.render();
-
+let isUpdateApp = true;
 contentEl.className = 'js-edit__content';
 
 const rootPosition = rootEl.getBoundingClientRect();
@@ -64,8 +65,8 @@ editorWrapperEl.appendChild(featureBox.render());
 contentEl.appendChild(customListEl);
 contentEl.appendChild(editorWrapperEl);
 
-secondToolbarEl.addEventListener('onChange', (event) => {
-  console.log('change', event);
+secondToolbarEl.addEventListener('onChange', (event: CustomEvent) => {
+  isUpdateApp = event.detail.isChecked;
 });
 
 const eslintInstance = new Eslint.Linter();
@@ -76,7 +77,6 @@ const lintEditor = () => {
   const lintResults = eslintInstance.verify(editor.getValue(), eslintRule);
   let messages = '';
   lintResults.forEach((result: any) => {
-    console.log(result);
     messages += (`[ESLint] Line ${result.line}, ${result.message} (${result.ruleId})\n`);
   });
   featureBox.getBoxContent().innerText = messages;
@@ -91,7 +91,10 @@ featureBox.on('changeType', () => {
 
 toolbarEl.addEventListener('save', () => {
   uploadFileToCustomization(customizationType, selectFileName, editor.getValue(), selectFileKey)
-    .then(() => {
+    .then(async () => {
+      if (isUpdateApp) {
+        await deployApp();
+      }
       desktop.rerender();
       mobile.rerender();
     })
