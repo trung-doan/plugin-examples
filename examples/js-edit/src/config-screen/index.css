@@ -1,6 +1,8 @@
 #jsedit-config {
   background-color: #1F2227;
-  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  /* min-height: 600px; */
 }
 
 #jsedit-config.maximize {
@@ -15,10 +17,13 @@
 .js-edit__content {
   display: flex;
   justify-content: space-between;
-  height: 100%;
+
   overflow: auto;
+  flex: 1;
 }
 
 .jsedit__editor-wrapper {
   width: 100%;
+  flex-direction: column;
+  display: flex;
 }

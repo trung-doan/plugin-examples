@@ -1,5 +1,5 @@
 .js-edit__content__editor {
-  min-height: 600px;
-  /* height: 100%; */
+  overflow: auto;
   width: 100%;
+  flex: 1;
 }

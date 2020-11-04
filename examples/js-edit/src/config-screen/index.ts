@@ -48,6 +48,9 @@ const mobileEl = mobile.render();
 
 contentEl.className = 'js-edit__content';
 
+const rootPosition = rootEl.getBoundingClientRect();
+rootEl.style.height = `calc(100vh - ${rootPosition.top}px - 48px)`;
+
 rootEl.appendChild(toolbarEl);
 rootEl.appendChild(secondToolbarEl);
 rootEl.appendChild(contentEl);
@@ -125,6 +128,8 @@ toolbarEl.addEventListener('max-min-toggle', () => {
   } else {
     rootEl.classList.toggle('maximize');
     minMaxEl.textContent = resource.MINIMIZE;
+    const position = rootEl.getBoundingClientRect();
+    rootEl.style.height = `100vh`;
   }
 });
 
