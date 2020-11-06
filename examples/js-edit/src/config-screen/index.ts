@@ -9,7 +9,7 @@ import Toolbar from '../components/toolbar/index';
 import SecondToolbar from '../components/second-toolbar/index';
 import CustomList from '../components/custom-list/index';
 import Editor from '../components/editor/index';
-import {confirmDiscard, confirmBackToPlugin} from '../common/index';
+import {confirmDiscard, confirmBackToPlugin, showSpinner, hideSpinner} from '../common/index';
 import UserGuid from '../components/user-guide/index';
 import {i18n, getUserGuildUrl} from '../config/index';
 import {Modal} from '../components/modal/index';
@@ -22,7 +22,7 @@ import FeatureBox from '../components/feture-box/index';
 import es5Rule from '../../vendor/eslint-es5';
 import es6Rule from '../../vendor/eslint-es6';
 import {deployApp} from '../services/index';
-import {showSpinner, hideSpinner} from '../common/index';
+
 
 const resource = i18n();
 let selectFileKey: string = '';

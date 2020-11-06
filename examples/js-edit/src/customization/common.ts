@@ -1,7 +1,6 @@
 import {uploadFile, getFile, getCustomization, updateCustomization} from '../services/index';
 import {JS_PC, JS_MB, CSS_PC, CSS_MB, DEFAULT_SOURCE} from '../constant';
 import {Category} from '../components/custom-list/category/index';
-import { hideSpinner, showSpinner } from '../common/index';
 
 export function getFileName(fileName: string, ext: 'js' | 'css') {
   const result = ext === 'js' ? fileName.match(/[^\\]*\.js$/g) : fileName.match(/[^\\]*\.css$/g);
