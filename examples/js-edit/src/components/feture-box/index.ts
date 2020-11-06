@@ -11,14 +11,12 @@ import './index.css';
 
 export default class FeatureBox {
   el: HTMLDivElement;
-  onChangeType: () => void
+  boxEl: HTMLDivElement;
   contentEl: HTMLParagraphElement;
   typeSelectEl: HTMLSelectElement;
-  // private _dispatch(eventName: string) {
-  //   const event = new CustomEvent(eventName);
-
-  //   this.el.dispatchEvent(event);
-  // }
+  resizerEl: HTMLDivElement;
+  onChangeType: () => void
+  doResize = false;
 
   private _createTypeSelect() {
     const selectEl = document.createElement('select');
@@ -52,6 +50,10 @@ export default class FeatureBox {
     this.el = document.createElement('div');
     this.el.className = 'js-edit__feature-box';
 
+    this.resizerEl = document.createElement('div');
+    this.resizerEl.className = 'js-edit__feature-box__resizer';
+    this.el.appendChild(this.resizerEl);
+
     this.typeSelectEl = this._createTypeSelect();
     this.typeSelectEl.onchange = () => {
       this.onChangeType && this.onChangeType();
@@ -67,15 +69,44 @@ export default class FeatureBox {
   }
 
   private _createBoxContent() {
-    const boxEl = document.createElement('div');
-    boxEl.classList.add('js-edit__box-content');
-    boxEl.appendChild(this.contentEl);
-    return boxEl;
+    this.boxEl = document.createElement('div');
+    this.boxEl.classList.add('js-edit__box-content');
+    this.boxEl.appendChild(this.contentEl);
+    return this.boxEl;
+  }
+
+  private _initResizeEvents() {
+    this.resizerEl.onmousedown = () => {
+      this.doResize = true;
+    };
+
+    document.addEventListener('mousemove', (event: MouseEvent) => {
+      if (!this.doResize) {
+        return;
+      }
+
+      event.preventDefault();
+
+      const elRect = this.el.getBoundingClientRect();
+      let height = elRect.bottom - event.clientY;
+      height = height > 100 ? height : 100;
+      this.el.style.height = `${height}px`;
+      this.boxEl.style.height = `${height - 24}px`;
+    });
+
+    document.addEventListener('mouseup', () => {
+      this.doResize = false;
+    });
+  }
+
+  private _initEvents() {
+    this._initResizeEvents();
   }
 
   constructor() {
     this.contentEl = document.createElement('p');
     this._initLayout();
+    this._initEvents();
   }
 
   on(event: string, handler: () => void) {
