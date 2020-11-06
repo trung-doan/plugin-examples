@@ -1,6 +1,7 @@
 import {uploadFile, getFile, getCustomization, updateCustomization} from '../services/index';
 import {JS_PC, JS_MB, CSS_PC, CSS_MB, DEFAULT_SOURCE} from '../constant';
 import {Category} from '../components/custom-list/category/index';
+import { hideSpinner, showSpinner } from '../common/index';
 
 export function getFileName(fileName: string, ext: 'js' | 'css') {
   const result = ext === 'js' ? fileName.match(/[^\\]*\.js$/g) : fileName.match(/[^\\]*\.css$/g);
@@ -47,38 +48,42 @@ export function renderEditorValueByFileKey(customKey: CustomizationType, editor:
 }
 
 export function renderCustomization(type: string, category: Category, editor: any) {
-  let customizations: any = [];
-  getCustomization().then((customization: any) => {
-    switch (type) {
-      case JS_PC:
-        customizations = customization.desktop.js;
-        break;
-      case CSS_PC:
-        customizations = customization.desktop.css;
-        break;
-      case JS_MB:
-        customizations = customization.mobile.js;
-        break;
-      case CSS_MB:
-        customizations = customization.mobile.css;
-        break;
-      default:
-        break;
-    }
-
-    Array.isArray(customizations) && customizations.forEach((item: any) => {
-      if (item.type === 'FILE') {
-        category.createFile(item.file.name, item.file.fileKey);
-        getFile(item.file.fileKey).then((file: any) => {
-          editor.ace.setValue(file);
-        }).catch((err: any) => {
-          console.log(err);
-        });
+  return new kintone.Promise((resolve: any, reject: any) => {
+    let customizations: any = [];
+    getCustomization().then((customization: any) => {
+      switch (type) {
+        case JS_PC:
+          customizations = customization.desktop.js;
+          break;
+        case CSS_PC:
+          customizations = customization.desktop.css;
+          break;
+        case JS_MB:
+          customizations = customization.mobile.js;
+          break;
+        case CSS_MB:
+          customizations = customization.mobile.css;
+          break;
+        default:
+          break;
       }
 
-      if (item.type === 'URL') {
-        category.addLink(item.url);
-      }
+      Array.isArray(customizations) && customizations.forEach((item: any) => {
+        if (item.type === 'FILE') {
+          category.createFile(item.file.name, item.file.fileKey);
+          getFile(item.file.fileKey).then((file: any) => {
+            editor.ace.setValue(file);
+            resolve(item);
+          }).catch((err: any) => {
+            console.log(err);
+            reject(err);
+          });
+        }
+
+        if (item.type === 'URL') {
+          category.addLink(item.url);
+        }
+      });
     });
   });
 }

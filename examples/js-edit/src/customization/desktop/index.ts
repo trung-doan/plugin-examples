@@ -77,7 +77,6 @@ export class Desktop {
       uploadFileToCustomization(customKey, fileName, value)
         .then(() => {
           this.rerender();
-          hideSpinner();
         })
         .catch((error: any) => {
           console.log(error);
@@ -120,8 +119,14 @@ export class Desktop {
   }
 
   private _initData() {
-    renderCustomization(JS_PC, this._jsCategory, this._editor);
-    renderCustomization(CSS_PC, this._cssCategory, this._editor);
+    showSpinner();
+    renderCustomization(JS_PC, this._jsCategory, this._editor).then(() => {
+      return renderCustomization(CSS_PC, this._cssCategory, this._editor);
+    }).then(() => {
+      hideSpinner();
+    }).catch(() => {
+      hideSpinner();
+    });
   }
 
   constructor(modal: Modal, editor: any) {
@@ -139,7 +144,12 @@ export class Desktop {
     this._jsCategory.reset();
     this._cssCategory.reset();
 
-    renderCustomization(JS_PC, this._jsCategory, this._editor);
-    renderCustomization(CSS_PC, this._cssCategory, this._editor);
+    renderCustomization(JS_PC, this._jsCategory, this._editor).then(() => {
+      return renderCustomization(CSS_PC, this._cssCategory, this._editor);
+    }).then(() => {
+      hideSpinner();
+    }).catch(() => {
+      hideSpinner();
+    });
   }
 }

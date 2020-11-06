@@ -77,7 +77,6 @@ export class Mobile {
       uploadFileToCustomization(customKey, fileName, value)
         .then(() => {
           this.rerender();
-          hideSpinner();
         })
         .catch((error: any) => {
           console.log(error);
@@ -120,8 +119,13 @@ export class Mobile {
   }
 
   private _initData() {
-    renderCustomization(JS_MB, this._jsCategory, this._editor);
-    renderCustomization(CSS_MB, this._cssCategory, this._editor);
+    renderCustomization(JS_MB, this._jsCategory, this._editor).then(() => {
+      return renderCustomization(CSS_MB, this._cssCategory, this._editor);
+    }).then(() => {
+      hideSpinner();
+    }).catch(() => {
+      hideSpinner();
+    });
   }
 
   constructor(modal: Modal, editor: any) {
@@ -139,7 +143,12 @@ export class Mobile {
     this._cssCategory.reset();
     this._jsCategory.reset();
 
-    renderCustomization(JS_MB, this._jsCategory, this._editor);
-    renderCustomization(CSS_MB, this._cssCategory, this._editor);
+    renderCustomization(JS_MB, this._jsCategory, this._editor).then(() => {
+      return renderCustomization(CSS_MB, this._cssCategory, this._editor);
+    }).then(() => {
+      hideSpinner();
+    }).catch(() => {
+      hideSpinner();
+    });
   }
 }

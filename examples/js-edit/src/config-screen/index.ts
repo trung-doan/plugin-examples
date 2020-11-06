@@ -22,6 +22,8 @@ import FeatureBox from '../components/feture-box/index';
 import es5Rule from '../../vendor/eslint-es5';
 import es6Rule from '../../vendor/eslint-es6';
 import {deployApp} from '../services/index';
+import {showSpinner, hideSpinner} from '../common/index';
+
 const resource = i18n();
 let selectFileKey: string = '';
 let selectFileName: string = '';
@@ -90,6 +92,7 @@ featureBox.on('changeType', () => {
 });
 
 toolbarEl.addEventListener('save', () => {
+  showSpinner();
   uploadFileToCustomization(customizationType, selectFileName, editor.getValue(), selectFileKey)
     .then(async () => {
       if (isUpdateApp) {
@@ -100,6 +103,7 @@ toolbarEl.addEventListener('save', () => {
     })
     .catch((error: any) => {
       console.log(error);
+      hideSpinner();
     });
 });
 
