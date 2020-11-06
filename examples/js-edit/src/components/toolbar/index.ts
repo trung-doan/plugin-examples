@@ -63,7 +63,7 @@ export default class Toolbar {
     rightGroupEl.className = 'js-edit__toolbar__group';
 
     const btns = [
-      [resource.HELP, 'help', 'js-edit__toolbar__group__btn'],
+      [resource.LINKS, 'links', 'js-edit__toolbar__group__btn'],
       [resource.MAXIMIZE, 'max-min-toggle', 'js-edit__toolbar__group__btn min-max-btn']
     ];
 

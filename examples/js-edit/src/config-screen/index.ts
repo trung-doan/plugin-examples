@@ -115,7 +115,7 @@ toolbarEl.addEventListener('back-to-plugins', () => {
   confirmBackToPlugin(() => window.history.back());
 });
 
-toolbarEl.addEventListener('help', () => {
+toolbarEl.addEventListener('links', () => {
   const userGuid = new UserGuid({
     links: getUserGuildUrl()
   });

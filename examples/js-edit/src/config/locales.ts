@@ -2,7 +2,7 @@ export const Locales = {
   en: {
     MSG_DISCARD: 'Your changes will be discarded.\n Are you sure you want to continue?',
     BACK_TO_PLUGINS: 'Back to Plug-ins',
-    HELP: 'Help',
+    LINKS: 'Links',
     MAXIMIZE: 'Maximize',
     MINIMIZE: 'Minimize',
     UPDATE_APP_WHEN_SAVING_THE_CODE: 'Update app when saving the code',
@@ -13,7 +13,7 @@ export const Locales = {
   ja: {
     MSG_DISCARD: '変更は破棄されます。よろしいですか？',
     BACK_TO_PLUGINS: 'プラグインへ戻る',
-    HELP: '',
+    LINKS: 'リンク',
     MAXIMIZE: '',
     MINIMIZE: 'Minimize',
     UPDATE_APP_WHEN_SAVING_THE_CODE: '運用環境に反映する',
@@ -24,7 +24,7 @@ export const Locales = {
   zh: {
     MSG_DISCARD: 'Your changes will be discarded.\n Are you sure you want to continue?',
     BACK_TO_PLUGINS: 'Back to Plug-ins',
-    HELP: 'Help',
+    LINKS: 'Links',
     MAXIMIZE: 'Maximize',
     MINIMIZE: 'Minimize',
     UPDATE_APP_WHEN_SAVING_THE_CODE: 'Update app when saving the code',
