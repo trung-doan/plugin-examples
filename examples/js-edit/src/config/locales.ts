@@ -7,18 +7,18 @@ export const Locales = {
     MINIMIZE: 'Minimize',
     UPDATE_APP_WHEN_SAVING_THE_CODE: 'Update app when saving the code',
     MSG_BACK_TO_PLUGIN: 'Your changes will be discarded.\nAre you sure you want to continue?',
-    CONFIRM: 'Confirm',
+    CONFIRM: 'OK',
     CANCEL: 'Cancel',
   },
   ja: {
     MSG_DISCARD: '変更は破棄されます。よろしいですか？',
     BACK_TO_PLUGINS: 'プラグインへ戻る',
     LINKS: 'リンク',
-    MAXIMIZE: '',
+    MAXIMIZE: 'Maximize',
     MINIMIZE: 'Minimize',
     UPDATE_APP_WHEN_SAVING_THE_CODE: '運用環境に反映する',
     MSG_BACK_TO_PLUGIN: '変更は破棄されます。よろしいですか？',
-    CONFIRM: '',
+    CONFIRM: 'OK',
     CANCEL: 'キャンセル',
   },
   zh: {
@@ -29,7 +29,7 @@ export const Locales = {
     MINIMIZE: 'Minimize',
     UPDATE_APP_WHEN_SAVING_THE_CODE: 'Update app when saving the code',
     MSG_BACK_TO_PLUGIN: 'Your changes will be discarded. \nAre you sure you want to continue?',
-    CONFIRM: 'Confirm',
+    CONFIRM: 'OK',
     CANCEL: 'Cancel',
   }
 };
