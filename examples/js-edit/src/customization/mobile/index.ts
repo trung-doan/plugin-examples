@@ -6,6 +6,7 @@ import {createModalContentRow} from '../modal/index';
 import {renderCustomization, uploadFileToCustomization, uploadLinkToCustomization, renderEditorValueByFileKey,
   getDefaultSourceForNewFile, getFileName} from '../common';
 import {JS_MB, CSS_MB} from '../../constant';
+import {showSpinner, hideSpinner} from '../../common/index';
 
 export class Mobile {
   el: HTMLDivElement;
@@ -72,13 +73,15 @@ export class Mobile {
       if (fileName === null) return;
 
       const value = getDefaultSourceForNewFile(customKey);
-
+      showSpinner();
       uploadFileToCustomization(customKey, fileName, value)
         .then(() => {
           this.rerender();
+          hideSpinner();
         })
         .catch((error: any) => {
           console.log(error);
+          hideSpinner();
         });
 
       this._modal.close();
