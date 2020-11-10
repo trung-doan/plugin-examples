@@ -67,7 +67,12 @@ export function renderCustomization(type: string, category: Category, editor: an
           break;
       }
 
-      Array.isArray(customizations) && customizations.forEach((item: any) => {
+      if (!Array.isArray(customizations) || customizations.length === 0) {
+        resolve();
+        return;
+      }
+
+      customizations.forEach((item: any) => {
         if (item.type === 'FILE') {
           category.createFile(item.file.name, item.file.fileKey);
           getFile(item.file.fileKey).then((file: any) => {
