@@ -1,0 +1,50 @@
+.js-edit__modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 0.05s;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 9999;
+}
+
+.js-edit__modal.open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.js-edit__modal__modal-container {
+  margin: 20% auto;
+  padding: 10px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 0.05s ease-in-out;
+}
+
+.js-edit__modal__modal-container__title {
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+  font-size: 15pt;
+  min-height: 24px;
+}
+
+.js-edit__modal__modal-container__content {
+  max-height: 30%;
+  margin: 10px;
+  overflow: auto;
+}
+
+.js-edit__modal__modal-container__footer {
+  margin: 10px;
+}
+
+.js-edit__modal__modal-container .kuc-icon-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}

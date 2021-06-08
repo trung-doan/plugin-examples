@@ -1,0 +1,22 @@
+.js-edit__toolbar {
+  background-color: #0d0d0f;
+  padding: 2px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #383838;
+  padding-bottom: 5px;
+}
+
+.js-edit__toolbar__group__btn {
+  background-color: #6b6b6b;
+  border: 1px solid #969696;
+  border-radius: 4px;
+  margin: 0px 2px;
+  color: #dcdcdc;
+  cursor: pointer;
+}
+
+.js-edit__toolbar__group__btn:hover {
+  background-color: #969696;
+  border: 1px solid #6b6b6b;
+}

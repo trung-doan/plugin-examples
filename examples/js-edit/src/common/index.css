@@ -1,0 +1,23 @@
+.js-edit__modal__modal-container__content-text {
+  padding: 10px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.js-edit__modal__modal-container__footer_buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.js-edit__modal__modal-container__footer_buttons .kuc-btn {
+  padding: 0 4px;
+  height: 36px;
+  line-height: 36px;
+  min-width: 100px;
+  margin-left: 5px;
+  font-size: 13px;
+}
+
+.js-edit__modal__modal-container__footer .kuc-btn.normal{
+  float: left;
+}
