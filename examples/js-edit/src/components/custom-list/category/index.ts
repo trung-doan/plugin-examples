@@ -30,6 +30,13 @@ export class Category {
     return this.el;
   }
 
+  addFile(fileName: string, file: any) {
+    const fileKey = file.fileKey;
+    const fileEl = this.createFile(fileName, file.fileKey);
+    this._highlightSelectedFileLink(fileEl as HTMLDivElement);
+    dispatchCustomEvent(this.el, 'file-select', {fileKey, fileName, customizationType: this._customizationType});
+  }
+
   reset() {
     this.el.innerHTML = '';
 
@@ -53,7 +60,7 @@ export class Category {
   createFile(fileName: string = 'newFile', fileKey: string = '') {
     const newFile = this._generateTemplate('file', fileName, fileKey);
     this.el.appendChild(newFile);
-    return this;
+    return newFile;
   }
 
   private _generateTemplate(

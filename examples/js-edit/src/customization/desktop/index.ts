@@ -5,7 +5,7 @@ import {Modal} from '../../components/modal/index';
 import {createModalContentRow} from '../modal/index';
 import {renderCustomization, uploadFileToCustomization, uploadLinkToCustomization, renderEditorValueByFileKey,
   getDefaultSourceForNewFile, getFileName} from '../common';
-import {JS_PC, CSS_PC, JS_MB, CSS_MB} from '../../constant';
+import {JS_PC, CSS_PC} from '../../constant';
 import {showSpinner, hideSpinner} from '../../common/index';
 
 export class Desktop {
@@ -23,7 +23,7 @@ export class Desktop {
   private _initProps(modal: Modal, editor: any) {
     this._hierarchy = new Hierarchy('Desktop');
     this._jsCategory = new Category('Javascript', JS_PC);
-    this._cssCategory = new Category('CSS', CSS_MB);
+    this._cssCategory = new Category('CSS', CSS_PC);
     this._modal = modal;
     this._editor = editor;
   }
@@ -75,8 +75,15 @@ export class Desktop {
       const value = getDefaultSourceForNewFile(customKey);
       showSpinner();
       uploadFileToCustomization(customKey, fileName, value)
-        .then(() => {
-          this.rerender();
+        .then((res: any) => {
+          const newFile = res.file;
+          if (customKey === CSS_PC) {
+            this._cssCategory.addFile(fileName, newFile);
+          } else if (customKey === JS_PC) {
+            this._jsCategory.addFile(fileName, newFile);
+          }
+
+          hideSpinner();
         })
         .catch((error: any) => {
           console.log(error);

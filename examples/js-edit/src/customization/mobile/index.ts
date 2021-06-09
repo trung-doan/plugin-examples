@@ -75,8 +75,15 @@ export class Mobile {
       const value = getDefaultSourceForNewFile(customKey);
       showSpinner();
       uploadFileToCustomization(customKey, fileName, value)
-        .then(() => {
-          this.rerender();
+        .then((res: any) => {
+          const newFile = res.file;
+          if (customKey === CSS_MB) {
+            this._cssCategory.addFile(fileName, newFile);
+          } else if (customKey === JS_MB) {
+            this._jsCategory.addFile(fileName, newFile);
+          }
+
+          hideSpinner();
         })
         .catch((error: any) => {
           console.log(error);
