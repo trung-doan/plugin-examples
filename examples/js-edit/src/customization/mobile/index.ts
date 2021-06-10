@@ -146,7 +146,7 @@ export class Mobile {
     return this.el;
   }
 
-  rerender() {
+  rerender(props?: any) {
     this._cssCategory.reset();
     this._jsCategory.reset();
 
@@ -154,6 +154,15 @@ export class Mobile {
       return renderCustomization(CSS_MB, this._cssCategory, this._editor);
     }).then(() => {
       hideSpinner();
+      if (!props.customizationType) return;
+      switch (props.customizationType) {
+        case 'js_mb':
+          this._jsCategory.selectFile(props.selectFileIndex);
+          break;
+        case 'css_mb':
+          this._cssCategory.selectFile(props.selectFileIndex);
+          break;
+      }
     }).catch(() => {
       hideSpinner();
     });

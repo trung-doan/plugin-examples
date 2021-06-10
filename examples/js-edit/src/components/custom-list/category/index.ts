@@ -8,9 +8,11 @@ export class Category {
   el: HTMLDivElement;
   name: string;
   private _customizationType: CustomizationType;
+  private files: any;
 
   private _initProps(categoryName: string, customizationType?: CustomizationType) {
     this.name = categoryName;
+    this.files = [];
     this._customizationType = customizationType || '';
   }
 
@@ -32,13 +34,14 @@ export class Category {
 
   addFile(fileName: string, file: any) {
     const fileKey = file.fileKey;
-    const fileEl = this.createFile(fileName, file.fileKey);
-    this._highlightSelectedFileLink(fileEl as HTMLDivElement);
-    dispatchCustomEvent(this.el, 'file-select', {fileKey, fileName, customizationType: this._customizationType});
+    const newFile = this.createFile(fileName, file.fileKey);
+    this._highlightSelectedFileLink(newFile.el as HTMLDivElement);
+    dispatchCustomEvent(this.el, 'file-select', {fileKey, fileName, customizationType: this._customizationType, fileIndex: newFile.fileIndex});
   }
 
   reset() {
     this.el.innerHTML = '';
+    this.files = [];
 
     const tempEl = this._generateTemplate(
       'category',
@@ -51,6 +54,17 @@ export class Category {
     }
   }
 
+  selectFile(fileIndex: number) {
+    if (!this.files[fileIndex]) return;
+    this._highlightSelectedFileLink(this.files[fileIndex].el as HTMLDivElement);
+    dispatchCustomEvent(this.el, 'file-select', {
+      fileKey: this.files[fileIndex].fileKey,
+      fileName: this.files[fileIndex].fileName,
+      customizationType: this._customizationType,
+      fileIndex
+    });
+  }
+
   addLink(link: string) {
     const newLink = this._generateTemplate('link', link);
     this.el.appendChild(newLink);
@@ -58,18 +72,28 @@ export class Category {
   }
 
   createFile(fileName: string = 'newFile', fileKey: string = '') {
-    const newFile = this._generateTemplate('file', fileName, fileKey);
-    this.el.appendChild(newFile);
+    const fileIndex = this.files.length;
+    const el = this._generateTemplate('file', fileName, fileKey, fileIndex);
+    this.el.appendChild(el);
+
+    const newFile = {
+      el,
+      fileName,
+      fileKey,
+      fileIndex
+    };
+    this.files.push(newFile);
     return newFile;
   }
 
   private _generateTemplate(
     type: 'category' | 'file' | 'link' | '' = '',
     value: string = '',
-    fileKey: string = ''
+    fileKey: string = '',
+    fileIndex: number | null = null
   ) {
     const template = this._getTemplate();
-    return fileKey !== '' ? template[type](value, fileKey) : template[type](value);
+    return fileKey !== '' ? template[type](value, fileKey, fileIndex) : template[type](value);
   }
 
   private _highlightSelectedFileLink(fileLink: HTMLDivElement) {
@@ -92,13 +116,13 @@ export class Category {
         divContainer.appendChild(divTitle);
         return divContainer;
       },
-      file: (value?: string, fileKey?: string) => {
+      file: (value?: string, fileKey?: string, fileIndex?: number | null) => {
         const div = document.createElement('div');
         div.classList.add('category__container__block__file');
         div.textContent = value;
         div.addEventListener('click', (event) => {
           this._highlightSelectedFileLink(event.target as HTMLDivElement);
-          dispatchCustomEvent(this.el, 'file-select', {fileKey, fileName: value, customizationType: this._customizationType});
+          dispatchCustomEvent(this.el, 'file-select', {fileKey, fileName: value, customizationType: this._customizationType, fileIndex});
         });
 
         return div;

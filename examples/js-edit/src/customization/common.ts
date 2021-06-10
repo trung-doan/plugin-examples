@@ -47,7 +47,7 @@ export function renderEditorValueByFileKey(customKey: CustomizationType, editor:
   });
 }
 
-export function renderCustomization(type: string, category: Category, editor: any) {
+export function renderCustomization(type: string, category: Category, selectedFileKey?: string) {
   return new kintone.Promise((resolve: any, reject: any) => {
     let customizations: any = [];
     getCustomization().then((customization: any) => {
@@ -77,7 +77,6 @@ export function renderCustomization(type: string, category: Category, editor: an
         if (item.type === 'FILE') {
           category.createFile(item.file.name, item.file.fileKey);
           getFile(item.file.fileKey).then((file: any) => {
-            // editor.ace.setValue(file);
             resolve(item);
           }).catch((err: any) => {
             console.log(err);

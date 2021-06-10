@@ -147,14 +147,23 @@ export class Desktop {
     return this.el;
   }
 
-  rerender() {
+  rerender(props?: any) {
     this._jsCategory.reset();
     this._cssCategory.reset();
 
-    renderCustomization(JS_PC, this._jsCategory, this._editor).then(() => {
-      return renderCustomization(CSS_PC, this._cssCategory, this._editor);
+    renderCustomization(JS_PC, this._jsCategory).then(() => {
+      return renderCustomization(CSS_PC, this._cssCategory);
     }).then(() => {
       hideSpinner();
+      if (!props.customizationType) return;
+      switch (props.customizationType) {
+        case 'js_pc':
+          this._jsCategory.selectFile(props.selectFileIndex);
+          break;
+        case 'css_pc':
+          this._cssCategory.selectFile(props.selectFileIndex);
+          break;
+      }
     }).catch(() => {
       hideSpinner();
     });
