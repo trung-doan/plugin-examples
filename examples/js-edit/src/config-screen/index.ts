@@ -115,6 +115,8 @@ toolbarEl.addEventListener('discard', () => {
   confirmDiscard(()=> {
     desktop.rerender();
     mobile.rerender();
+    editor.ace.setValue('');
+    editor.setDisabled(true);
   });
 });
 
