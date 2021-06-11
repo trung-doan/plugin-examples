@@ -3,3 +3,9 @@
   width: 100%;
   flex: 1;
 }
+.js-edit__content__editor--disable {
+  cursor: not-allowed;
+}
+.js-edit__content__editor--disable .ace_editor {
+  display: none;
+}

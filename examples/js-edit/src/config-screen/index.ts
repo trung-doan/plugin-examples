@@ -28,6 +28,7 @@ const resource = i18n();
 let selectFileKey: string = '';
 let selectFileName: string = '';
 let customizationType: CustomizationType = '';
+let selectFileIndex = null as any;
 
 const editor = new Editor();
 const featureBox = new FeatureBox();
@@ -98,7 +99,10 @@ toolbarEl.addEventListener('save', () => {
       if (isUpdateApp) {
         await deployApp();
       }
-      desktop.rerender();
+      desktop.rerender({
+        customizationType,
+        selectFileIndex
+      });
       mobile.rerender();
     })
     .catch((error: any) => {
@@ -111,6 +115,8 @@ toolbarEl.addEventListener('discard', () => {
   confirmDiscard(()=> {
     desktop.rerender();
     mobile.rerender();
+    editor.ace.setValue('');
+    editor.setDisabled(true);
   });
 });
 
@@ -144,10 +150,12 @@ desktopEl.addEventListener('file-select', (event: any) => {
   selectFileKey = event.detail.fileKey;
   selectFileName = event.detail.fileName;
   customizationType = event.detail.customizationType;
+  selectFileIndex = event.detail.fileIndex;
 });
 
 mobileEl.addEventListener('file-select', (event: any) => {
   selectFileKey = event.detail.fileKey;
   selectFileName = event.detail.fileName;
   customizationType = event.detail.customizationType;
+  selectFileIndex = event.detail.fileIndex;
 });

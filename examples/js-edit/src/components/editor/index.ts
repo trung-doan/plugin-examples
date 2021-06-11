@@ -15,6 +15,7 @@ export default class Editor {
   private _initLayout() {
     this.el = document.createElement('div');
     this.el.className = 'js-edit__content__editor';
+    this.el.classList.add('js-edit__content__editor--disable');
   }
 
   private _initAce() {
@@ -31,7 +32,7 @@ export default class Editor {
       enableSnippets: false,
       enableLiveAutocompletion: true,
       tabSize: 2,
-      useSoftTabs: true,
+      useSoftTabs: true
     });
     this.ace.on('change', () => {
       this.onChange && this.onChange(this.getValue());
@@ -41,6 +42,14 @@ export default class Editor {
   constructor() {
     this._initLayout();
     this._initAce();
+  }
+
+  setDisabled(isDiable: boolean) {
+    if (isDiable) {
+      this.el.classList.add('js-edit__content__editor--disable');
+      return;
+    }
+    this.el.classList.remove('js-edit__content__editor--disable');
   }
 
   getValue() {

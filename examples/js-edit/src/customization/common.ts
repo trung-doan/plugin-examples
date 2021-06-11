@@ -39,6 +39,7 @@ function _getEditorMode(customKey: CustomizationType) {
 
 export function renderEditorValueByFileKey(customKey: CustomizationType, editor: any, fileKey: string) {
   getFile(fileKey).then((file: any) => {
+    editor.setDisabled(false);
     editor.ace.setValue(file);
     editor.ace.getSession().setMode(_getEditorMode(customKey));
   }).catch((err: any) => {
@@ -46,7 +47,7 @@ export function renderEditorValueByFileKey(customKey: CustomizationType, editor:
   });
 }
 
-export function renderCustomization(type: string, category: Category, editor: any) {
+export function renderCustomization(type: string, category: Category, selectedFileKey?: string) {
   return new kintone.Promise((resolve: any, reject: any) => {
     let customizations: any = [];
     getCustomization().then((customization: any) => {
@@ -76,7 +77,6 @@ export function renderCustomization(type: string, category: Category, editor: an
         if (item.type === 'FILE') {
           category.createFile(item.file.name, item.file.fileKey);
           getFile(item.file.fileKey).then((file: any) => {
-            editor.ace.setValue(file);
             resolve(item);
           }).catch((err: any) => {
             console.log(err);
@@ -111,8 +111,12 @@ export function uploadFileToCustomization(type: CustomizationType, fileName: str
       //   return kintone.Promise.reject(invalidCustomizationsLimit);
       // }
       return updateCustomization(newCustomization).then((resp: any) => {
-        console.log(resp);
-        return kintone.Promise.resolve();
+        return getCustomization().then((customizations: any) => {
+          const files = _getCustomizationPart(type, customizations);
+          const newFile = files[files.length - 1];
+          return kintone.Promise.resolve(newFile);
+        });
+        // return kintone.Promise.resolve(content);
       }).catch((error: any) => {
         console.log(error);
         return kintone.Promise.reject();
